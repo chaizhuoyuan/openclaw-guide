@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🦞 OpenClaw 安装指南</title>
+<style>
+:root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff; --green: #3fb950; --orange: #d29922; --red: #f85149; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'SF Pro', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+.container { max-width: 800px; margin: 0 auto; padding: 20px; }
+.header { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); border-radius: 16px; margin-bottom: 32px; }
+.header h1 { font-size: 32px; margin-bottom: 8px; }
+.header p { color: var(--muted); font-size: 16px; }
+h2 { font-size: 22px; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+h3 { font-size: 17px; margin: 20px 0 10px; color: var(--accent); }
+p { margin-bottom: 12px; }
+.step-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.step-card .step-num { background: var(--accent); color: #fff; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; margin-right: 8px; }
+.step-card h4 { display: inline; font-size: 16px; }
+.step-card .step-body { margin-top: 12px; }
+code { background: #1c2333; padding: 2px 8px; border-radius: 4px; font-family: 'SF Mono', Menlo, monospace; font-size: 14px; color: var(--green); }
+pre { background: #1c2333; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 12px 0; border: 1px solid var(--border); }
+pre code { padding: 0; background: none; }
+.tip { background: #0d2847; border: 1px solid #1f6feb; border-radius: 8px; padding: 14px 16px; margin: 12px 0; font-size: 14px; }
+.tip::before { content: "💡 "; }
+.warn { background: #2d1b00; border: 1px solid var(--orange); border-radius: 8px; padding: 14px 16px; margin: 12px 0; font-size: 14px; }
+.warn::before { content: "⚠️ "; }
+.btn-link { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; margin: 8px 4px 8px 0; transition: opacity 0.2s; }
+.btn-link:hover { opacity: 0.85; }
+.btn-link.secondary { background: #30363d; }
+.screenshot { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin: 12px 0; }
+.screenshot .label { font-size: 12px; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+.screenshot .path { background: #1c2333; padding: 12px 16px; border-radius: 8px; font-family: monospace; font-size: 13px; display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.screenshot .path .arrow { color: var(--accent); }
+.screenshot .highlight-box { border: 2px dashed var(--orange); border-radius: 8px; padding: 12px; margin-top: 8px; font-size: 14px; }
+.method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 16px 0; }
+.method-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; text-align: center; }
+.method-card .icon { font-size: 36px; margin-bottom: 8px; }
+.method-card h4 { margin-bottom: 4px; }
+.method-card p { font-size: 13px; color: var(--muted); }
+.provider-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+.provider-header { padding: 16px 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+.provider-header h4 { display: flex; align-items: center; gap: 8px; font-size: 16px; }
+.provider-header .arrow { transition: transform 0.2s; }
+.provider-card.open .provider-header .arrow { transform: rotate(90deg); }
+.provider-body { display: none; padding: 0 20px 20px; border-top: 1px solid var(--border); }
+.provider-card.open .provider-body { display: block; padding-top: 16px; }
+.nav-list { list-style: none; padding: 0; }
+.nav-list li { padding: 6px 0; }
+.nav-list a { color: var(--accent); text-decoration: none; }
+.nav-list a:hover { text-decoration: underline; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+.tag.easy { background: #0d3321; color: var(--green); }
+.tag.medium { background: #2d1b00; color: var(--orange); }
+.copy-btn { background: none; border: 1px solid var(--border); color: var(--muted); padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; float: right; }
+.copy-btn:hover { color: var(--text); border-color: var(--muted); }
+.footer { text-align: center; padding: 32px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); margin-top: 40px; }
+ol { padding-left: 20px; margin: 8px 0; }
+ol li { margin: 6px 0; }
+ul { padding-left: 20px; margin: 8px 0; }
+ul li { margin: 4px 0; }
+a { color: var(--accent); }
+img.guide-img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); margin: 8px 0; }
+@media (prefers-color-scheme: light) {
+  :root { --bg: #f6f8fa; --card: #fff; --border: #d0d7de; --text: #1f2328; --muted: #656d76; --accent: #0969da; --green: #1a7f37; --orange: #9a6700; --red: #cf222e; }
+  pre, code { background: #f0f3f6; }
+  .tip { background: #ddf4ff; border-color: #54aeff; }
+  .warn { background: #fff8c5; border-color: #d4a72c; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>🦞 OpenClaw 安装指南</h1>
+  <p>从零开始，10分钟搭建你的 AI 私人助手</p>
+  <p style="font-size:13px; margin-top:8px;">支持 Telegram · WhatsApp · Discord · 浏览器</p>
+</div>
+
+<!-- TOC -->
+<div class="step-card">
+  <h4>📋 目录</h4>
+  <ul class="nav-list" style="margin-top:10px;">
+    <li>1. <a href="#prereq">准备工作</a></li>
+    <li>2. <a href="#apikey">获取 AI API Key（最重要！）</a></li>
+    <li>3. <a href="#install">安装 OpenClaw</a></li>
+    <li>4. <a href="#telegram">连接 Telegram</a></li>
+    <li>5. <a href="#whatsapp">连接 WhatsApp</a></li>
+    <li>6. <a href="#daily">日常使用</a></li>
+    <li>7. <a href="#faq">常见问题</a></li>
+  </ul>
+</div>
+
+<!-- ============ 1. PREREQ ============ -->
+<h2 id="prereq">1️⃣ 准备工作</h2>
+
+<p>你需要：</p>
+<ul>
+  <li>一台电脑（Mac / Linux / Windows 都可以）或一台云服务器（VPS）</li>
+  <li>Node.js 22 或更高版本</li>
+  <li>一个 AI 模型的 API Key（下面会教你怎么拿）</li>
+</ul>
+
+<div class="tip">如果你只想在自己电脑上用，Mac/Linux 直接装就行。如果想 24 小时在线，建议用云服务器（VPS）。</div>
+
+<!-- ============ 2. API KEY ============ -->
+<h2 id="apikey">2️⃣ 获取 AI API Key（最重要！）</h2>
+
+<p>OpenClaw 本身是免费的，但它需要连接一个 AI 模型来"思考"。你需要从 AI 公司获取一个 API Key（类似密码）。</p>
+
+<p>以下三个选一个就行，推荐 Anthropic Claude：</p>
+
+<!-- Claude -->
+<div class="provider-card open" onclick="this.classList.toggle('open')">
+  <div class="provider-header">
+    <h4>🟣 Anthropic Claude（推荐）</h4>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="provider-body">
+    
+    <div class="step-card">
+      <span class="step-num">1</span>
+      <h4>打开 Anthropic Console</h4>
+      <div class="step-body">
+        <a href="https://console.anthropic.com/" target="_blank" class="btn-link">打开 console.anthropic.com →</a>
+        <p>如果没有账号，点右上角 <strong>Sign Up</strong> 注册（支持 Google 账号登录）</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">2</span>
+      <h4>进入 API Keys 页面</h4>
+      <div class="step-body">
+        <div class="screenshot">
+          <div class="label">导航路径</div>
+          <div class="path">
+            左侧菜单 <span class="arrow">→</span> <strong>API Keys</strong>
+          </div>
+          <p>或者直接打开：</p>
+          <a href="https://console.anthropic.com/settings/keys" target="_blank" class="btn-link">直接打开 API Keys 页面 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">3</span>
+      <h4>创建新的 API Key</h4>
+      <div class="step-body">
+        <div class="screenshot">
+          <div class="label">操作步骤</div>
+          <ol>
+            <li>点击右上角 <strong>「+ Create Key」</strong> 按钮</li>
+            <li>给 Key 起个名字（比如 "openclaw"）</li>
+            <li>选择 Workspace（默认就行）</li>
+            <li>点击 <strong>「Create Key」</strong></li>
+          </ol>
+          <div class="highlight-box">
+            🔑 生成的 Key 长这样：<code>sk-ant-api03-xxxxxxxxxxxxx</code><br>
+            <strong style="color:var(--red);">⚠️ 这个 Key 只会显示一次！立刻复制保存！</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">4</span>
+      <h4>充值（必须）</h4>
+      <div class="step-body">
+        <p>新账号有 $5 免费额度。用完后需要充值：</p>
+        <div class="screenshot">
+          <div class="path">
+            左侧菜单 <span class="arrow">→</span> <strong>Plans & Billing</strong> <span class="arrow">→</span> <strong>Add Payment Method</strong>
+          </div>
+        </div>
+        <a href="https://console.anthropic.com/settings/billing" target="_blank" class="btn-link secondary">打开充值页面 →</a>
+        <p style="font-size:13px; color:var(--muted);">💰 日常聊天大约 $5-10/月，很便宜</p>
+      </div>
+    </div>
+
+    <div class="tip">推荐模型：<code>claude-sonnet-4-20250514</code>（性价比最高）或 <code>claude-opus-4-0</code>（最强）</div>
+  </div>
+</div>
+
+<!-- OpenAI -->
+<div class="provider-card" onclick="this.classList.toggle('open')">
+  <div class="provider-header">
+    <h4>🟢 OpenAI GPT</h4>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="provider-body">
+    
+    <div class="step-card">
+      <span class="step-num">1</span>
+      <h4>打开 OpenAI Platform</h4>
+      <div class="step-body">
+        <a href="https://platform.openai.com/" target="_blank" class="btn-link">打开 platform.openai.com →</a>
+        <p>用 ChatGPT 账号直接登录即可（不需要另外注册）</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">2</span>
+      <h4>创建 API Key</h4>
+      <div class="step-body">
+        <div class="screenshot">
+          <div class="label">导航路径</div>
+          <div class="path">
+            右上角头像 <span class="arrow">→</span> <strong>API Keys</strong> <span class="arrow">→</span> <strong>Create new secret key</strong>
+          </div>
+        </div>
+        <a href="https://platform.openai.com/api-keys" target="_blank" class="btn-link">直接打开 API Keys 页面 →</a>
+        <div class="highlight-box" style="margin-top:12px;">
+          🔑 Key 长这样：<code>sk-proj-xxxxxxxxxxxxx</code><br>
+          <strong style="color:var(--red);">⚠️ 只显示一次，立刻复制保存！</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">3</span>
+      <h4>充值</h4>
+      <div class="step-body">
+        <div class="screenshot">
+          <div class="path">
+            左侧菜单 <span class="arrow">→</span> <strong>Settings</strong> <span class="arrow">→</span> <strong>Billing</strong> <span class="arrow">→</span> <strong>Add payment method</strong>
+          </div>
+        </div>
+        <a href="https://platform.openai.com/settings/organization/billing/overview" target="_blank" class="btn-link secondary">打开充值页面 →</a>
+      </div>
+    </div>
+
+    <div class="tip">推荐模型：<code>gpt-4o</code>（最强）或 <code>gpt-4o-mini</code>（便宜）</div>
+  </div>
+</div>
+
+<!-- Google -->
+<div class="provider-card" onclick="this.classList.toggle('open')">
+  <div class="provider-header">
+    <h4>🔵 Google Gemini</h4>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="provider-body">
+    
+    <div class="step-card">
+      <span class="step-num">1</span>
+      <h4>打开 Google AI Studio</h4>
+      <div class="step-body">
+        <a href="https://aistudio.google.com/" target="_blank" class="btn-link">打开 aistudio.google.com →</a>
+        <p>用 Google 账号登录</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">2</span>
+      <h4>获取 API Key</h4>
+      <div class="step-body">
+        <div class="screenshot">
+          <div class="label">导航路径</div>
+          <div class="path">
+            左侧菜单 <span class="arrow">→</span> <strong>Get API key</strong> <span class="arrow">→</span> <strong>Create API key</strong>
+          </div>
+        </div>
+        <a href="https://aistudio.google.com/apikey" target="_blank" class="btn-link">直接打开 API Key 页面 →</a>
+        <div class="highlight-box" style="margin-top:12px;">
+          🔑 Key 长这样：<code>AIzaSyxxxxxxxxxxxxxxxxx</code><br>
+          可以随时回来查看，不用怕丢
+        </div>
+      </div>
+    </div>
+
+    <div class="tip">🎉 <strong>Gemini 有免费额度！</strong>每分钟 15 次请求，适合轻度使用。推荐模型：<code>gemini-2.0-flash</code></div>
+  </div>
+</div>
+
+<!-- Claude Max -->
+<div class="provider-card" onclick="this.classList.toggle('open')">
+  <div class="provider-header">
+    <h4>💎 Claude Max 订阅（不需要 API Key）</h4>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="provider-body">
+    <p>如果你已经订阅了 Claude Pro/Max（$20-100/月），可以直接用，不需要单独的 API Key：</p>
+    <ol>
+      <li>安装 OpenClaw 时，在引导向导中选择 <strong>「Claude Code / OAuth」</strong></li>
+      <li>浏览器会弹出登录页面</li>
+      <li>用你的 Claude 账号登录授权</li>
+      <li>完成！不需要额外花钱</li>
+    </ol>
+    <div class="tip">这种方式用的是你现有的订阅额度，不额外收费。但有使用量限制。</div>
+  </div>
+</div>
+
+<!-- ============ 3. INSTALL ============ -->
+<h2 id="install">3️⃣ 安装 OpenClaw</h2>
+
+<div class="method-grid">
+  <div class="method-card">
+    <div class="icon">🚀</div>
+    <h4>一键脚本</h4>
+    <span class="tag easy">最简单</span>
+    <p>适合个人电脑</p>
+  </div>
+  <div class="method-card">
+    <div class="icon">🐳</div>
+    <h4>Docker</h4>
+    <span class="tag medium">推荐服务器</span>
+    <p>适合 VPS / 24小时运行</p>
+  </div>
+</div>
+
+<h3>方式一：一键脚本（个人电脑）</h3>
+
+<p>打开终端（Terminal），粘贴以下命令：</p>
+
+<p><strong>Mac / Linux：</strong></p>
+<pre><code>curl -fsSL https://openclaw.ai/install.sh | bash</code></pre>
+
+<p><strong>Windows（PowerShell）：</strong></p>
+<pre><code>iwr -useb https://openclaw.ai/install.ps1 | iex</code></pre>
+
+<p>安装过程中会问你几个问题：</p>
+<ol>
+  <li><strong>选择 AI 提供商</strong> → 选 Anthropic / OpenAI / Google（取决于你上面拿了哪个 Key）</li>
+  <li><strong>输入 API Key</strong> → 粘贴你刚才复制的 Key</li>
+  <li><strong>是否安装为系统服务</strong> → 选 <strong>Yes</strong>（这样重启电脑后也会自动运行）</li>
+</ol>
+
+<div class="tip">安装完成后，打开浏览器访问 <a href="http://127.0.0.1:18789/" target="_blank">http://127.0.0.1:18789/</a> 就能直接聊天了！</div>
+
+<h3>方式二：Docker（服务器 / VPS）</h3>
+
+<p>适合在云服务器上 24 小时运行：</p>
+
+<pre><code># 1. 克隆代码
+git clone https://github.com/openclaw/openclaw.git
+cd openclaw
+
+# 2. 用预构建镜像安装（更快）
+export OPENCLAW_IMAGE="ghcr.io/openclaw/openclaw:latest"
+
+# 3. 运行安装脚本
+./docker-setup.sh</code></pre>
+
+<p>脚本会引导你完成配置，和一键脚本类似。</p>
+
+<div class="warn">VPS 至少需要 <strong>2GB 内存</strong>。如果内存不够，先加个 swap：<br>
+<code>sudo fallocate -l 2G /swapfile && sudo chmod 600 /swapfile && sudo mkswap /swapfile && sudo swapon /swapfile</code></div>
+
+<!-- ============ 4. TELEGRAM ============ -->
+<h2 id="telegram">4️⃣ 连接 Telegram</h2>
+
+<div class="step-card">
+  <span class="step-num">1</span>
+  <h4>在 Telegram 创建 Bot</h4>
+  <div class="step-body">
+    <ol>
+      <li>打开 Telegram，搜索 <strong>@BotFather</strong></li>
+      <li>发送 <code>/newbot</code></li>
+      <li>输入 bot 的显示名称（比如 "我的AI助手"）</li>
+      <li>输入 bot 的用户名（必须以 <code>bot</code> 结尾，比如 <code>myai_helper_bot</code>）</li>
+      <li>BotFather 会回复一个 <strong>token</strong>，格式：<code>123456789:ABCdef...</code></li>
+    </ol>
+    <div class="highlight-box">
+      复制这个 token！下一步要用。
+    </div>
+    <a href="https://t.me/BotFather" target="_blank" class="btn-link">打开 BotFather →</a>
+  </div>
+</div>
+
+<div class="step-card">
+  <span class="step-num">2</span>
+  <h4>在 OpenClaw 中添加 Telegram</h4>
+  <div class="step-body">
+    <pre><code>openclaw channels add --channel telegram --token "粘贴你的BOT_TOKEN"</code></pre>
+    <p>然后重启网关：</p>
+    <pre><code>openclaw gateway restart</code></pre>
+  </div>
+</div>
+
+<div class="step-card">
+  <span class="step-num">3</span>
+  <h4>配对你的账号</h4>
+  <div class="step-body">
+    <ol>
+      <li>在 Telegram 中找到你刚创建的 bot，给它发一条消息（比如 "hi"）</li>
+      <li>回到终端，运行：</li>
+    </ol>
+    <pre><code># 查看配对请求
+openclaw pairing list telegram
+
+# 批准配对（把 CODE 换成显示的配对码）
+openclaw pairing approve telegram CODE</code></pre>
+    <p>✅ 配对成功后，你就可以通过 Telegram 和 AI 聊天了！</p>
+  </div>
+</div>
+
+<!-- ============ 5. WHATSAPP ============ -->
+<h2 id="whatsapp">5️⃣ 连接 WhatsApp</h2>
+
+<div class="step-card">
+  <span class="step-num">1</span>
+  <h4>扫码连接</h4>
+  <div class="step-body">
+    <pre><code>openclaw channels login</code></pre>
+    <ol>
+      <li>终端会显示一个 <strong>QR 码</strong></li>
+      <li>打开手机 WhatsApp → 设置 → 已关联设备 → 关联设备</li>
+      <li>扫描终端中的 QR 码</li>
+    </ol>
+    <p>✅ 连接成功后，别人给你发 WhatsApp 消息，AI 就会自动回复！</p>
+  </div>
+</div>
+
+<div class="warn">WhatsApp 连接是绑定你的个人账号的。如果你退出 WhatsApp 或换手机，需要重新扫码。</div>
+
+<!-- ============ 6. DAILY ============ -->
+<h2 id="daily">6️⃣ 日常使用</h2>
+
+<h3>常用命令</h3>
+<pre><code># 查看运行状态
+openclaw status
+
+# 查看日志（实时）
+openclaw logs --follow
+
+# 重启服务
+openclaw gateway restart
+
+# 打开浏览器控制台
+openclaw dashboard
+
+# 检查配置问题
+openclaw doctor</code></pre>
+
+<h3>在哪里聊天？</h3>
+<ul>
+  <li>🌐 <strong>浏览器</strong>：打开 <code>http://127.0.0.1:18789/</code></li>
+  <li>📱 <strong>Telegram</strong>：直接给你的 bot 发消息</li>
+  <li>📱 <strong>WhatsApp</strong>：给自己发消息（或别人发给你）</li>
+</ul>
+
+<!-- ============ 7. FAQ ============ -->
+<h2 id="faq">7️⃣ 常见问题</h2>
+
+<div class="provider-card" onclick="this.classList.toggle('open')">
+  <div class="provider-header">
+    <h4>❓ 输入 openclaw 命令提示"找不到"</h4>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="provider-body">
+    <p>需要把 npm 的全局目录加到 PATH：</p>
+    <pre><code># Mac/Linux：加到 ~/.zshrc 或 ~/.bashrc
+export PATH="$(npm prefix -g)/bin:$PATH"
+
+# 然后重新打开终端</code></pre>
+  </div>
+</div>
+
+<div class="provider-card" onclick="this.classList.toggle('open')">
+  <div class="provider-header">
+    <h4>❓ Telegram bot 不回复消息</h4>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="provider-body">
+    <ol>
+      <li>检查 OpenClaw 是否在运行：<code>openclaw status</code></li>
+      <li>检查是否已配对：<code>openclaw pairing list telegram</code></li>
+      <li>查看日志找原因：<code>openclaw logs --follow</code></li>
+      <li>确认 bot token 正确</li>
+    </ol>
+  </div>
+</div>
+
+<div class="provider-card" onclick="this.classList.toggle('open')">
+  <div class="provider-header">
+    <h4>❓ API 提示余额不足</h4>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="provider-body">
+    <p>需要去对应平台充值：</p>
+    <ul>
+      <li>Anthropic：<a href="https://console.anthropic.com/settings/billing" target="_blank">充值页面</a></li>
+      <li>OpenAI：<a href="https://platform.openai.com/settings/organization/billing/overview" target="_blank">充值页面</a></li>
+      <li>Google Gemini：免费额度用完后需要启用付费计划</li>
+    </ul>
+  </div>
+</div>
+
+<div class="provider-card" onclick="this.classList.toggle('open')">
+  <div class="provider-header">
+    <h4>❓ 怎么更新 OpenClaw？</h4>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="provider-body">
+    <pre><code># npm 安装的
+npm update -g openclaw
+openclaw gateway restart
+
+# Docker 安装的
+cd openclaw && git pull
+docker compose down
+export OPENCLAW_IMAGE="ghcr.io/openclaw/openclaw:latest"
+./docker-setup.sh</code></pre>
+  </div>
+</div>
+
+<div class="provider-card" onclick="this.classList.toggle('open')">
+  <div class="provider-header">
+    <h4>❓ 每月大概花多少钱？</h4>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="provider-body">
+    <ul>
+      <li><strong>Claude Sonnet</strong>：日常聊天 $5-15/月</li>
+      <li><strong>GPT-4o</strong>：日常聊天 $5-15/月</li>
+      <li><strong>GPT-4o-mini</strong>：$1-5/月（更便宜但稍弱）</li>
+      <li><strong>Gemini Flash</strong>：免费额度内可能够用</li>
+      <li><strong>Claude Max 订阅</strong>：$20/月（固定价格，不按用量）</li>
+      <li><strong>VPS 服务器</strong>：$5-10/月（如果需要 24 小时在线）</li>
+    </ul>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>📖 官方文档：<a href="https://docs.openclaw.ai" target="_blank">docs.openclaw.ai</a></p>
+  <p>💻 源代码：<a href="https://github.com/openclaw/openclaw" target="_blank">github.com/openclaw/openclaw</a></p>
+  <p>💬 社区：<a href="https://discord.com/invite/clawd" target="_blank">Discord</a></p>
+  <p style="margin-top:16px;">🦐 小虾米整理 · 2026</p>
+</div>
+
+</div>
+
+<script>
+// Prevent event bubbling for links inside collapsibles
+document.querySelectorAll('.provider-body a, .provider-body pre, .provider-body code').forEach(el => {
+  el.addEventListener('click', e => e.stopPropagation());
+});
+</script>
+</body>
+</html>
