@@ -85,6 +85,7 @@ img.guide-img { max-width: 100%; border-radius: 8px; border: 1px solid var(--bor
   <ul class="nav-list" style="margin-top:10px;">
     <li>1. <a href="#prereq">准备工作</a></li>
     <li>2. <a href="#apikey">获取 AI API Key（最重要！）</a></li>
+    <li>💰 <a href="#compare">AI 提供商价格对比</a></li>
     <li>3. <a href="#install">安装 OpenClaw</a></li>
     <li>4. <a href="#telegram">连接 Telegram</a></li>
     <li>5. <a href="#whatsapp">连接 WhatsApp</a></li>
@@ -290,6 +291,158 @@ img.guide-img { max-width: 100%; border-radius: 8px; border: 1px solid var(--bor
     </ol>
     <div class="tip">这种方式用的是你现有的订阅额度，不额外收费。但有使用量限制。</div>
   </div>
+</div>
+
+<!-- ============ 2.5 COMPARE ============ -->
+<h2 id="compare">💰 AI 提供商价格对比</h2>
+
+<p>选哪个？一张表看清楚：</p>
+
+<div class="step-card" style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-size:14px;">
+<thead>
+<tr style="border-bottom:2px solid var(--accent);">
+  <th style="text-align:left; padding:10px 8px;">提供商</th>
+  <th style="text-align:left; padding:10px 8px;">模型</th>
+  <th style="text-align:right; padding:10px 8px;">输入价格</th>
+  <th style="text-align:right; padding:10px 8px;">输出价格</th>
+  <th style="text-align:right; padding:10px 8px;">月估费</th>
+  <th style="text-align:center; padding:10px 8px;">免费额度</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom:1px solid var(--border); background:#1a1040;">
+  <td style="padding:8px;">🟣 Anthropic</td>
+  <td style="padding:8px;"><strong>Claude Sonnet 4</strong><br><span style="color:var(--green);">⭐ 性价比之王</span></td>
+  <td style="padding:8px; text-align:right;">$3 / 1M</td>
+  <td style="padding:8px; text-align:right;">$15 / 1M</td>
+  <td style="padding:8px; text-align:right; color:var(--green);">$5-15</td>
+  <td style="padding:8px; text-align:center;">$5 新人</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:8px;">🟣 Anthropic</td>
+  <td style="padding:8px;">Claude Opus 4<br><span style="color:var(--muted);">最强模型</span></td>
+  <td style="padding:8px; text-align:right;">$15 / 1M</td>
+  <td style="padding:8px; text-align:right;">$75 / 1M</td>
+  <td style="padding:8px; text-align:right; color:var(--orange);">$20-50</td>
+  <td style="padding:8px; text-align:center;">$5 新人</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:8px;">🟣 Anthropic</td>
+  <td style="padding:8px;">Claude Haiku<br><span style="color:var(--muted);">最便宜</span></td>
+  <td style="padding:8px; text-align:right;">$0.25 / 1M</td>
+  <td style="padding:8px; text-align:right;">$1.25 / 1M</td>
+  <td style="padding:8px; text-align:right; color:var(--green);">$1-3</td>
+  <td style="padding:8px; text-align:center;">$5 新人</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border); background:#0a1a0a;">
+  <td style="padding:8px;">🟢 OpenAI</td>
+  <td style="padding:8px;"><strong>GPT-4o</strong><br><span style="color:var(--muted);">主力模型</span></td>
+  <td style="padding:8px; text-align:right;">$2.50 / 1M</td>
+  <td style="padding:8px; text-align:right;">$10 / 1M</td>
+  <td style="padding:8px; text-align:right; color:var(--green);">$5-15</td>
+  <td style="padding:8px; text-align:center;">$5 新人</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:8px;">🟢 OpenAI</td>
+  <td style="padding:8px;">GPT-4o-mini<br><span style="color:var(--muted);">超便宜</span></td>
+  <td style="padding:8px; text-align:right;">$0.15 / 1M</td>
+  <td style="padding:8px; text-align:right;">$0.60 / 1M</td>
+  <td style="padding:8px; text-align:right; color:var(--green);">$0.5-2</td>
+  <td style="padding:8px; text-align:center;">$5 新人</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:8px;">🟢 OpenAI</td>
+  <td style="padding:8px;">o3<br><span style="color:var(--muted);">推理模型</span></td>
+  <td style="padding:8px; text-align:right;">$10 / 1M</td>
+  <td style="padding:8px; text-align:right;">$40 / 1M</td>
+  <td style="padding:8px; text-align:right; color:var(--orange);">$15-40</td>
+  <td style="padding:8px; text-align:center;">$5 新人</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border); background:#001a2a;">
+  <td style="padding:8px;">🔵 Google</td>
+  <td style="padding:8px;"><strong>Gemini 2.0 Flash</strong><br><span style="color:var(--green);">⭐ 有免费额度</span></td>
+  <td style="padding:8px; text-align:right;">$0.10 / 1M</td>
+  <td style="padding:8px; text-align:right;">$0.40 / 1M</td>
+  <td style="padding:8px; text-align:right; color:var(--green);">$0-2</td>
+  <td style="padding:8px; text-align:center; color:var(--green);"><strong>✅ 免费<br>15次/分</strong></td>
+</tr>
+<tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:8px;">🔵 Google</td>
+  <td style="padding:8px;">Gemini 2.5 Pro<br><span style="color:var(--muted);">最强推理</span></td>
+  <td style="padding:8px; text-align:right;">$1.25 / 1M</td>
+  <td style="padding:8px; text-align:right;">$10 / 1M</td>
+  <td style="padding:8px; text-align:right; color:var(--green);">$3-10</td>
+  <td style="padding:8px; text-align:center; color:var(--green);"><strong>✅ 免费<br>5次/分</strong></td>
+</tr>
+<tr style="border-bottom:1px solid var(--border); background:#1a0a1a;">
+  <td style="padding:8px;">💎 订阅制</td>
+  <td style="padding:8px;"><strong>Claude Max</strong><br><span style="color:var(--muted);">不按量计费</span></td>
+  <td style="padding:8px; text-align:right;" colspan="2">固定月费，不按用量</td>
+  <td style="padding:8px; text-align:right; color:var(--orange);">$100</td>
+  <td style="padding:8px; text-align:center;">无</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:8px;">💎 订阅制</td>
+  <td style="padding:8px;">Claude Pro<br><span style="color:var(--muted);">有用量上限</span></td>
+  <td style="padding:8px; text-align:right;" colspan="2">固定月费，有额度限制</td>
+  <td style="padding:8px; text-align:right; color:var(--green);">$20</td>
+  <td style="padding:8px; text-align:center;">无</td>
+</tr>
+<tr>
+  <td style="padding:8px;">💎 订阅制</td>
+  <td style="padding:8px;">ChatGPT Plus<br><span style="color:var(--muted);">有用量上限</span></td>
+  <td style="padding:8px; text-align:right;" colspan="2">固定月费，有额度限制</td>
+  <td style="padding:8px; text-align:right; color:var(--green);">$20</td>
+  <td style="padding:8px; text-align:center;">无</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p style="font-size:13px; color:var(--muted);">* "1M" = 100万个 token ≈ 75万个英文单词 ≈ 150万个中文字。日常聊天每天约用 5-20K token。</p>
+<p style="font-size:13px; color:var(--muted);">* "月估费"按每天聊 20-50 条消息估算，实际看用量。</p>
+
+<h3>🤔 怎么选？</h3>
+
+<div class="method-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+  <div class="method-card" style="text-align:left; border-color:var(--green);">
+    <div style="font-size:20px; margin-bottom:6px;">💚 预算有限</div>
+    <p><strong>Google Gemini 2.0 Flash</strong></p>
+    <p style="font-size:13px;">免费额度够日常用<br>质量也不差<br>适合先体验</p>
+  </div>
+  <div class="method-card" style="text-align:left; border-color:var(--accent);">
+    <div style="font-size:20px; margin-bottom:6px;">⚖️ 性价比</div>
+    <p><strong>Claude Sonnet 4</strong></p>
+    <p style="font-size:13px;">最聪明的中档模型<br>编程能力强<br>$5-15/月</p>
+  </div>
+  <div class="method-card" style="text-align:left; border-color:var(--orange);">
+    <div style="font-size:20px; margin-bottom:6px;">👑 最强</div>
+    <p><strong>Claude Opus 4</strong></p>
+    <p style="font-size:13px;">地表最强 AI<br>复杂任务首选<br>$20-50/月</p>
+  </div>
+  <div class="method-card" style="text-align:left; border-color:#a855f7;">
+    <div style="font-size:20px; margin-bottom:6px;">🔒 固定预算</div>
+    <p><strong>Claude Pro / Max</strong></p>
+    <p style="font-size:13px;">月费固定 $20-100<br>不怕超额<br>需已有订阅</p>
+  </div>
+</div>
+
+<div class="tip">
+<strong>新手建议：</strong>先用 <strong>Google Gemini Flash</strong>（免费）体验，觉得好用再换 <strong>Claude Sonnet</strong>（更聪明）。
+</div>
+
+<h3>⚠️ 各平台限制</h3>
+
+<div class="step-card">
+<ul>
+  <li><strong>Anthropic</strong>：新账号每分钟 5 次请求（充值后提升到 50 次/分），需绑信用卡才能提升限额</li>
+  <li><strong>OpenAI</strong>：Tier 1 每分钟 500 次（很宽裕），需先充 $5 才能用 GPT-4o</li>
+  <li><strong>Google</strong>：免费版每分钟 15 次请求，每天 1500 次；付费后大幅提升</li>
+  <li><strong>Claude Pro</strong>：每 5 小时有消息数上限（大约 100 条 Sonnet），超了要等</li>
+  <li><strong>Claude Max</strong>：上限更高（约 Sonnet 无限 + Opus 200条/天），但 $100/月</li>
+  <li><strong>ChatGPT Plus</strong>：GPT-4o 每 3 小时约 80 条，超了降级到 GPT-4o-mini</li>
+</ul>
 </div>
 
 <!-- ============ 3. INSTALL ============ -->
